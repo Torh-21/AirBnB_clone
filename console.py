@@ -2,8 +2,14 @@
 """ This contains the entry point to the command interpreter """
 
 import cmd
-# from models.base_model import BaseModel
-# from models.storage import storage
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.storage import storage
+from models.user import User
 
 
 def parse(input_string):
@@ -41,7 +47,12 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
     __classes = {
+            "Amenity",
             "BaseModel",
+            "City",
+            "Place",
+            "Review",
+            "State",
             "User"
             }
 
