@@ -4,6 +4,7 @@
 from base_model import BaseModel
 from state import State
 
+
 class User(BaseModel):
     """ Represents a City
 
