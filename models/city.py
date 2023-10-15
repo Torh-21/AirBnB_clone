@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """ This class inherits from the "BaseModel" class """
 
-from base_model import BaseModel
-from state import State
+from models.base_model import BaseModel
+from models.state import State
 
 
-class User(BaseModel):
+class City(BaseModel):
     """ Represents a City
 
     Attributes:
