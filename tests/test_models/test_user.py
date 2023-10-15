@@ -126,7 +126,7 @@ class TestUser_save(unittest.TestCase):
         self.assertLess(first_updated_at, second_updated_at)
         sleep(0.05)
         user.save()
-        self.assertLess(second_updated_at, us.updated_at)
+        self.assertLess(second_updated_at, user.updated_at)
 
     def test_save_with_arg(self):
         user = User()
