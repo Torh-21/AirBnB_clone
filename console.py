@@ -2,6 +2,8 @@
 """ This contains the entry point to the command interpreter """
 
 import cmd
+import re
+from shlex import split
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -78,10 +80,10 @@ class HBNBCommand(cmd.Cmd):
         class_name = parse(user_input)
         if len(class_name) == 0:
             print("** class name missing **")
-        elif class_name[0] not in HBNBcommand.__classes:
-            print("** class doesn't exist")
+        elif class_name[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist**")
         else:
-            print(eval(class_name[0]().id))
+            print(eval(class_name[0])().id)
             storage.save()
 
     def do_show(self, user_input):
@@ -95,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
 
         if len(class_id) == 0:
             print("** class name missing **")
-        elif class_id[0] not in HBNBcommand.__classes:
+        elif class_id[0] not in HBNBCommand.__classes:
             print("** class doesn't exist**")
         elif len(class_id) == 1:
             print("** instance id missing **")
@@ -115,7 +117,7 @@ class HBNBCommand(cmd.Cmd):
 
         if len(class_id) == 0:
             print("** class name missing **")
-        elif class_id[0] not in HBNBcommand.__classes:
+        elif class_id[0] not in HBNBCommand.__classes:
             print("** class doesn't exist**")
         elif len(class_id) == 1:
             print("** instance id missing **")
@@ -136,12 +138,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             obj = []
-            for obj in storage.all.values():
-                if len(class_name) > 0 and \
-                        class_name[0] == obj.__class__.__name__:
+            for obj in storage.all().values():
+                if len(class_name) > 0 and class_name[0] == obj.__class__.__name__:
                     obj.append(obj.__str__())
                 elif len(class_name) == 0:
-                    obj.append(obj.__str())
+                    obj.append(obj.__str__())
             print(obj)
 
     def do_update(self, user_input):
