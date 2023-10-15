@@ -137,13 +137,13 @@ class HBNBCommand(cmd.Cmd):
         if len(class_name) > 0 and class_name[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            obj = []
+            objl = []
             for obj in storage.all().values():
                 if len(class_name) > 0 and class_name[0] == obj.__class__.__name__:
-                    obj.append(obj.__str__())
+                    objl.append(obj.__str__())
                 elif len(class_name) == 0:
-                    obj.append(obj.__str__())
-            print(obj)
+                    objl.append(obj.__str__())
+            print(objl)
 
     def do_update(self, user_input):
         """ Usage:
