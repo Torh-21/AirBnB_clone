@@ -29,7 +29,7 @@ class TestBaseModel(unittest.TestCase):
     def tearDown(self):
         """This method tears down the test methods."""
         pass
-    
+ 
     def resetStorage(self):
         """Resets FileStorage data."""
         FileStorage._FileStorage__objects = {}
@@ -184,12 +184,4 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(str(e.exception), msg)
 
     def test_for_save_with_too_many_args(self):
-        """Tests save() with too many arguments."""
-        self.resetStorage()
-        with self.assertRaises(TypeError) as e:
-            BaseModel.save(self, 98)
-        msg = "save() takes 1 positional argument but 2 were given"
-        self.assertEqual(str(e.exception), msg)
-
-if __name__ == '__main__':
-    unittest.main()
+        

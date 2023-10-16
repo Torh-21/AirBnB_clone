@@ -87,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_show(self, user_input):
-        """ Usage: show <class> <id> or <class>.show(<id>)
+        """ Usage: show <class name> <id> or <class name>.show(<id>)
         Prints the string representation of an instance based on
         the class name and id.
         """
@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
             print(objdict["{}.{}".format(class_id[0], class_id[1])])
 
     def do_destroy(self, user_input):
-        """ Usage: destroy <class> <id> or <class>.destroy(<id>)
+        """ Usage: destroy <class name> <id> or <class name>.destroy(<id>)
         Deletes an instance based on the class name and id
         (save the change into the JSON file)
         """
@@ -128,7 +128,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, user_input):
-        """ Usage: all or all <class>
+        """ Usage: all or all <class name> or <class name>.all()
         Prints all string representation of all instances
         based or not on the class name
         """
@@ -139,15 +139,31 @@ class HBNBCommand(cmd.Cmd):
         else:
             objl = []
             for obj in storage.all().values():
-                if len(class_name) > 0 and class_name[0] == obj.__class__.__name__:
+                if len(class_name) > 0 and \
+                        class_name[0] == obj.__class__.__name__:
                     objl.append(obj.__str__())
                 elif len(class_name) == 0:
                     objl.append(obj.__str__())
             print(objl)
 
+    def do_count(self, user_input):
+        """ Usage: <class name>.count()
+
+        Retrieve the number of instances of a class
+        """
+
+        parsed_input = parse(user_input)
+        count = 0
+        for obj in storage.all().values():
+            if parsed_input[0] == obj.__class__.__name__:
+                count += 1
+        print(count)
+
     def do_update(self, user_input):
         """ Usage:
-        update <class name> <id> <attribute name> "<attribute value>"
+        update <class name> <id> <attribute name> "<attribute value>",
+        <class name>.update(<id>, <attribute name>, <attribute value>),
+        <class name>.update(<id>, <dictionary representation>)
 
         Updates an instance based on the class name and id by adding or
         updating attribute (save the change into the JSON file).
