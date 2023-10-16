@@ -148,7 +148,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, user_input):
         """ Usage: <class name>.count()
-
         Retrieve the number of instances of a class
         """
 
